@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resiko FO - ZET ID</title>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            background: #0a0a0f;
+            background: linear-gradient(135deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%);
+        }
+        .video-background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            pointer-events: none;
+        }
+        .video-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .risk-card {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        .risk-card:hover {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.5);
+            transform: translateY(-5px);
+        }
+        .risk-icon {
+            width: 64px; height: 64px;
+            background: rgba(239, 68, 68, 0.2);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .mitigation-card {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        .mitigation-card:hover {
+            background: rgba(34, 197, 94, 0.15);
+            border-color: rgba(34, 197, 94, 0.5);
+            transform: translateY(-5px);
+        }
+        .mitigation-icon {
+            width: 64px; height: 64px;
+            background: rgba(34, 197, 94, 0.2);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .warning-box {
+            background: rgba(251, 191, 36, 0.15);
+            border: 2px solid rgba(251, 191, 36, 0.4);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+<video class="video-background desktop-video" autoplay muted loop playsinline>
+    <source src="https://www.image2url.com/r2/default/videos/1778969167301-233d9dc3-aee5-4ec6-9492-61c83c2de008.mp4" type="video/mp4">
+</video>
+<video class="video-background mobile-video" autoplay muted loop playsinline style="display: none;">
+    <source src="https://www.image2url.com/r2/default/videos/1779048953332-ee1f1a72-d04c-4f65-afa8-badd640e3e50.mp4" type="video/mp4">
+    <!-- Ganti YOUR_MOBILE_VIDEO_URL_HERE dengan link video untuk HP -->
+</video>
+<div class="video-overlay"></div>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-nav" id="sidebarNav">
+        <div class="nav-items">
+            <a href="index.html" class="nav-item" data-tooltip="Beranda" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span class="nav-text" style="display:none;">Beranda</span>
+            </a>
+            <a href="index.html#fitur" class="nav-item" data-tooltip="Fitur" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span class="nav-text" style="display:none;">Fitur</span>
+            </a>
+            <a href="pilih-paket.html" class="nav-item" data-tooltip="Pilih Paket" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span class="nav-text" style="display:none;">Pilih Paket</span>
+            </a>
+            <a href="resi-angin.html" class="nav-item" data-tooltip="Resi Angin" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <span class="nav-text" style="display:none;">Resi Angin</span>
+            </a>
+            <a href="resi-manual.html" class="nav-item" data-tooltip="Resi Manual" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span class="nav-text" style="display:none;">Resi Manual</span>
+            </a>
+            <a href="resiko-fo.html" class="nav-item active" data-tooltip="Resiko FO" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span class="nav-text" style="display:none;">Resiko FO</span>
+            </a>
+            <a href="index.html#cara" class="nav-item" data-tooltip="Cara Kerja" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span class="nav-text" style="display:none;">Cara Kerja</span>
+            </a>
+            <a href="index.html#testimoni" class="nav-item" data-tooltip="Testimoni" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span class="nav-text" style="display:none;">Testimoni</span>
+            </a>
+        </div>
+        <div class="sidebar-cta" onclick="openWhatsApp()" title="Hubungi Kami">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Page Header -->
+        <section class="hero" style="min-height: 50vh;">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="badge" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5); color: #fca5a5;">
+                        <span class="badge-dot" style="background: #ef4444; box-shadow: 0 0 10px #ef4444;"></span>
+                        Informasi Penting
+                    </div>
+                    <h1 class="hero-title" style="font-size: clamp(2rem, 4.5vw, 3.5rem);">⚠️ RESIKO FAKE ORDER (FO)</h1>
+                    <p class="hero-desc">Memahami risiko dan cara meminimalkan bahaya penggunaan jasa Fake Order untuk toko Shopee Anda. Transparansi penuh untuk keputusan yang bijak.</p>
+                    <div class="hero-actions">
+                        <button class="btn-primary" onclick="scrollToRisks()">Pelajari Resiko →</button>
+                        <button class="btn-secondary" onclick="window.location.href='pilih-paket.html'">← Kembali ke Paket</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="features">
+            <div class="section-header">
+                <span class="section-tag" style="background: rgba(251, 191, 36, 0.2); border-color: rgba(251, 191, 36, 0.4); color: #fcd34d;">Disclaimer</span>
+            <h2 class="section-title">Penting Dibaca Sebelum Menggunakan Jasa FO</h2>
+            </div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="warning-box">
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--fg); opacity: 0.95;">
+                        <strong style="color: #fbbf24;">⚠️ Penting:</strong> Layanan Fake Order (FO) yang kami sediakan bertujuan untuk membantu penjual meningkatkan kredibilitas toko melalui ulasan positif. Namun, penggunaan jasa FO memiliki risiko yang perlu Anda ketahui sebelum menggunakan layanan ini.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--fg); opacity: 0.95; margin-top: 1.5rem;">
+                        <strong style="color: #fbbf24;">⚠️ Resiko FO:</strong> Tergantung Hoki Kadang Sesudah Di FO Produk Ada Yang Di Hapus & Ada Yang Tidak, Kadang Tulisan Terjual nya Ada Yang Di hapus & Ada Yang Tidak Tergantuk Barbar Atau Tidak Kalo Terlalu Barbar Bisa Keditek Dan Ada Juga Yang Aman ( Tergantung Hoki Juga ) Toko Bisa Kena Batas an.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--fg); opacity: 0.95;margin-top: 1.5rem;">
+                        <strong style="color: #fbbf24;">⚠️ Note:</strong> Admin Tidak Bertanggung Jawab Jika Sesudah FO Seller Mengalami Hal Yang Di Atas, Kami Hanya Melakukan Tugas Dari Customer Dan Sudah Mengerjakan Sebaik Mungkin & Semaksimal Mungkin!.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risks Section -->
+        <!--<section class="features" id="risks">
+            <div class="section-header">
+                <span class="section-tag" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;">Resiko</span>
+                <h2 class="section-title">Resiko Menggunakan Fake Order</h2>
+            </div>
+            <div class="features-grid">
+                <div class="risk-card">
+                    <div class="risk-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #fca5a5;">Banned Akun</h3>
+                    <p class="feature-desc">Shopee dapat mendeteksi aktivitas mencurigakan dan memberikan sanksi mulai dari penurunan ranking hingga banned permanen pada toko.</p>
+                </div>
+                <div class="risk-card">
+                    <div class="risk-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #fca5a5;">Penurunan Ranking</h3>
+                    <p class="feature-desc">Jika terdeteksi, toko dapat kehilangan ranking pencarian dan visibility yang telah dibangun dengan susah payah.</p>
+                </div>
+                <div class="risk-card">
+                    <div class="risk-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #fca5a5;">Label Toko Tidak Terpercaya</h3>
+                    <p class="feature-desc">Toko dapat diberi label khusus oleh Shopee sebagai tanda peringatan kepada pembeli bahwa toko terindikasi aktivitas tidak wajar.</p>
+                </div>
+                <div class="risk-card">
+                    <div class="risk-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #fca5a5;">Hilangnya Trust Pembeli</h3>
+                    <p class="feature-desc">Jika pembeli mengetahui aktivitas FO, kepercayaan terhadap toko dapat hilang dan berdampak pada penjualan nyata.</p>
+                </div>
+                <div class="risk-card">
+                    <div class="risk-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #fca5a5;">Review Dihapus</h3>
+                    <p class="feature-desc">Shopee dapat menghapus review yang terindikasi fake tanpa pemberitahuan sebelumnya, membuat investasi FO menjadi sia-sia.</p>
+                </div>
+                <div class="risk-card">
+                    <div class="risk-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #fca5a5;">Risiko Keuangan</h3>
+                    <p class="feature-desc">Uang yang diinvestasikan untuk FO dapat hilang jika akun terkena sanksi sebelum mendapatkan manfaat yang diharapkan.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mitigation Section -->
+        <section class="features">
+            <div class="section-header">
+                <span class="section-tag" style="background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.4); color: #86efac;">Solusi</span>
+                <h2 class="section-title">Cara Meminimalkan Resiko</h2>
+            </div>
+            <div class="features-grid">
+                <div class="mitigation-card">
+                    <div class="mitigation-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #86efac;">Gunakan Secara Bertahap</h3>
+                    <p class="feature-desc">Mulai dengan jumlah FO yang sedikit dan tingkatkan secara bertahap untuk menghindari deteksi sistem yang tiba-tiba.</p>
+                </div>
+                <div class="mitigation-card">
+                    <div class="mitigation-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #86efac;">Jaga Rasio Natural</h3>
+                    <p class="feature-desc">Pastikan rasio antara FO dan order asli tetap wajar. Jangan gunakan FO sebagai sumber utama ulasan toko.</p>
+                </div>
+                <div class="mitigation-card">
+                    <div class="mitigation-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #86efac;">Gunakan Akun Buyer Real</h3>
+                    <p class="feature-desc">Pastikan layanan FO menggunakan akun buyer yang terverifikasi dan memiliki aktivitas natural seperti pembeli sungguhan.</p>
+                </div>
+                <div class="mitigation-card">
+                    <div class="mitigation-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #86efac;">Varian Produk</h3>
+                    <p class="feature-desc">Sebar FO ke berbagai produk, jangan fokus hanya pada satu produk untuk menghindari kecurigaan sistem.</p>
+                </div>
+                <div class="mitigation-card">
+                    <div class="mitigation-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #86efac;">Review yang Realistis</h3>
+                    <p class="feature-desc">Pastikan review yang diberikan bervariasi, tidak semua sempurna 5 bintang. Ada beberapa review 4 bintang dengan keluhan kecil.</p>
+                </div>
+                <div class="mitigation-card">
+                    <div class="mitigation-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <h3 class="feature-title" style="color: #86efac;">Fokus pada Kualitas Produk</h3>
+                    <p class="feature-desc">Gunakan FO hanya sebagai dorongan awal. Fokus utama tetap pada kualitas produk dan layanan untuk mendapatkan review asli.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices -->
+        <section class="how-it-works">
+            <div class="section-header">
+                <span class="section-tag" style="background: rgba(59, 130, 246, 0.2); border-color: rgba(59, 130, 246, 0.4); color: #93c5fd;">Rekomendasi</span>
+                <h2 class="section-title">Best Practices Menggunakan FO</h2>
+            </div>
+            <div class="steps-container">
+                <div class="steps-line"></div>
+                <div class="step-item">
+                    <div class="step-number" style="border-color: #3b82f6; color: #3b82f6;">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Mulai dengan Paket Kecil</h3>
+                        <p class="step-desc">Gunakan paket Starter terlebih dahulu untuk tes respon sistem dan lihat hasilnya sebelum meningkat ke paket yang lebih besar.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number" style="border-color: #3b82f6; color: #3b82f6;">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Pilih Metode yang Tepat</h3>
+                        <p class="step-desc">Resi Manual lebih aman untuk jangka panjang karena ada pengiriman fisik, namun Resi Angin lebih hemat dan cepat.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number" style="border-color: #3b82f6; color: #3b82f6;">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Jeda Antar Order</h3>
+                        <p class="step-desc">Buat jeda waktu yang wajar antar fake order agar terlihat natural dan tidak menimbulkan kecurigaan sistem.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number" style="border-color: #3b82f6; color: #3b82f6;">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Monitoring Rutin</h3>
+                        <p class="step-desc">Pantau performa toko secara rutin setelah menggunakan FO. Jika ada tanda-tanda sanksi, hentikan penggunaan FO.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Warning Box -->
+        <!--<section class="features">
+            <div class="section-header">
+                <span class="section-tag" style="background: rgba(251, 191, 36, 0.2); border-color: rgba(251, 191, 36, 0.4); color: #fcd34d;">Peringatan</span>
+                <h2 class="section-title">Keputusan Ada di Tangan Anda</h2>
+            </div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="warning-box">
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--fg); opacity: 0.95;">
+                        <strong style="color: #fbbf24;">📌 Perlu Diingat:</strong> Penggunaan jasa Fake Order sepenuhnya menjadi tanggung jawab Anda sebagai pemilik toko. Kami tidak dapat menjamin keamanan akun Anda dari sanksi yang mungkin diterapkan oleh Shopee.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--fg); opacity: 0.95; margin-top: 1.5rem;">
+                        Kami berkomitmen untuk menyediakan layanan FO dengan kualitas terbaik dan risiko yang minimal, namun kami tidak bertanggung jawab atas konsekuensi yang timbul dari keputusan Anda menggunakan layanan ini.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--fg); opacity: 0.95; margin-top: 1.5rem;">
+                        <strong style="color: #fbbf24;">💡 Saran Kami:</strong> Gunakan FO sebagai strategi tambahan, bukan satu-satunya strategi. Fokus pada kualitas produk, pelayanan pelanggan, dan marketing yang legitimate untuk jangka panjang.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-box">
+                <h2 class="cta-title">Masih Memiliki Pertanyaan?</h2>
+                <p class="cta-desc">Hubungi admin kami untuk konsultasi gratis mengenai penggunaan FO yang aman dan strategis untuk toko Anda.</p>
+                <button class="btn-primary" onclick="openWhatsApp()">💬 Chat WhatsApp Sekarang</button>
+                <div class="contact-info">
+                    <div class="contact-item">📞 +62 859-2163-2214</div>
+                    <div class="contact-item">⏰ Senin-Minggu, 08:00-23:00 WIB</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-inner">
+                <div class="footer-copy">2024 ZET ID. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="index.html">Kembali ke Beranda</a>
+                    <a href="pilih-paket.html">Pilih Paket</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Custom JavaScript -->
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+    <script>
+        // Scroll to risks section
+        function scrollToRisks() {
+            document.getElementById('risks').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
