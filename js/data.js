@@ -1,0 +1,121 @@
+// =====================================================
+// DATA LOADER - Mengambil data dari file JSON
+// =====================================================
+
+let CONFIG = null;
+let isLoading = true;
+
+// Data default (FALLBACK)
+const DEFAULT_CONFIG = {
+    whatsappNumber: "6285921632214",
+    danaNumber: "085921632214",
+    seaBankAccount: {
+        bank: "SeaBank Indonesia",
+        number: "901234567890",
+        name: "ZET ID OFFICIAL"
+    },
+    packages: [
+        {
+            id: "starter",
+            name: "Starter",
+            description: "Cocok untuk pemula",
+            price: 50000,
+            priceDisplay: "Rp 50K",
+            features: ["10 Fake Order", "Chat Natural + Review 5⭐", "Riview Bisa Pakek Foto & Vidio", "Foto Dan Vidio Dari Seller", "Proses 1-2 Hari"],
+            isPopular: false
+        },
+        {
+            id: "business",
+            name: "Business", 
+            description: "Paling populer untuk growth",
+            price: 175000,
+            priceDisplay: "Rp 175K",
+            features: ["35 Fake Order", "Chat Natural + Review 5⭐", "Riview Bisa Pakek Foto & Vidio", "Foto Dan Vidio Dari Seller", "Proses 1-2 Hari"],
+            isPopular: true
+        },
+        {
+            id: "enterprise",
+            name: "Enterprise",
+            description: "Untuk toko besar & reseller", 
+            price: 500000,
+            priceDisplay: "Rp 500K",
+            features: ["100 Fake Order", "Chat Natural + Review 5⭐", "Riview Bisa Pakek Foto & Vidio", "Foto Dan Vidio Dari Seller", "Proses 1-2 Hari"],
+            isPopular: false
+        }
+    ],
+    testimonials: [
+        {
+            text: "\"Pakai Resi Angin + Bayar DANA, super praktis! Toko langsung banjir review positif tanpa repot kirim barang.\"",
+            result: "+200% Sales"
+        },
+        {
+            text: "\"Resi Manual via SeaBank transfer mudah. Alamat CO jelas, kirim paket kosong. Rekomendasi!\"",
+            result: "Star Seller"
+        }
+    ],
+    features: [
+        {
+            icon: "shield",
+            title: "100% Aman",
+            description: "Admin Terpercaya Dan Amanah, akun buyer real terverifikasi."
+        },
+        {
+            icon: "clock",
+            title: "Proses Cepat",
+            description: "Order diproses menit setelah pembayaran."
+        },
+        {
+            icon: "users",
+            title: "Akun Real",
+            description: "Bukan bot, aktivitas normal seperti pembeli sungguhan."
+        }
+    ],
+    contact: {
+        phone: "+62 859-2163-2214",
+        hours: "Senin-Minggu, 08:00-23:00 WIB"
+    },
+    footer: {
+        copyright: "2024 ZET ID. All rights reserved.",
+        links: [
+            {text: "Syarat & Ketentuan", url: "#"},
+            {text: "Kebijakan Privasi", url: "#"},
+            {text: "FAQ", url: "#"}
+        ]
+    }
+};
+
+async function loadConfig() {
+    try {
+        // Coba load dari folder data/
+        const response = await fetch('data/config.json');
+        
+        if (response.ok) {
+            CONFIG = await response.json();
+            console.log('✅ Config loaded successfully from data/config.json');
+        } else {
+            throw new Error('JSON not found');
+        }
+    } catch (error) {
+        console.error('❌ Error loading config, using default data:', error);
+        CONFIG = DEFAULT_CONFIG;
+    }
+    
+    isLoading = false;
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.dispatchEvent(new CustomEvent('dataLoaded'));
+        });
+    } else {
+        document.dispatchEvent(new CustomEvent('dataLoaded'));
+    }
+    
+    return CONFIG;
+}
+
+function getConfig() {
+    return CONFIG;
+}
+
+// Start loading
+loadConfig();

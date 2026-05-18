@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Paket & Metode Kirim - ZET ID</title>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            background: #0a0a0f;
+            background: linear-gradient(135deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%);
+        }
+        .video-background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            pointer-events: none;
+        }
+        .video-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+<video class="video-background desktop-video" autoplay muted loop playsinline>
+    <source src="https://www.image2url.com/r2/default/videos/1778969167301-233d9dc3-aee5-4ec6-9492-61c83c2de008.mp4" type="video/mp4">
+</video>
+<video class="video-background mobile-video" autoplay muted loop playsinline style="display: none;">
+    <source src="https://www.image2url.com/r2/default/videos/1779048953332-ee1f1a72-d04c-4f65-afa8-badd640e3e50.mp4" type="video/mp4">
+    <!-- Ganti YOUR_MOBILE_VIDEO_URL_HERE dengan link video untuk HP -->
+</video>
+<div class="video-overlay"></div>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-nav" id="sidebarNav">
+        <div class="nav-items">
+            <a href="index.html" class="nav-item" data-tooltip="Beranda" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span class="nav-text" style="display:none;">Beranda</span>
+            </a>
+            <a href="index.html#fitur" class="nav-item" data-tooltip="Fitur" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span class="nav-text" style="display:none;">Fitur</span>
+            </a>
+            <a href="pilih-paket.html" class="nav-item active" data-tooltip="Pilih Paket" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span class="nav-text" style="display:none;">Pilih Paket</span>
+            </a>
+            <a href="resi-angin.html" class="nav-item" data-tooltip="Resi Angin" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <span class="nav-text" style="display:none;">Resi Angin</span>
+            </a>
+            <a href="resi-manual.html" class="nav-item" data-tooltip="Resi Manual" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span class="nav-text" style="display:none;">Resi Manual</span>
+            </a>
+            <a href="resiko-fo.html" class="nav-item" data-tooltip="Resiko FO" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span class="nav-text" style="display:none;">Resiko FO</span>
+            </a>
+            <a href="index.html#cara" class="nav-item" data-tooltip="Cara Kerja" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span class="nav-text" style="display:none;">Cara Kerja</span>
+            </a>
+            <a href="index.html#testimoni" class="nav-item" data-tooltip="Testimoni" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span class="nav-text" style="display:none;">Testimoni</span>
+            </a>
+        </div>
+        <div class="sidebar-cta" onclick="openWhatsApp()" title="Hubungi Kami">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Page Header -->
+        <section class="hero" style="min-height: 50vh;">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="badge"><span class="badge-dot"></span>Tersedia 24/7 - Proses Cepat</div>
+                    <h1 class="hero-title" style="font-size: clamp(2rem, 4.5vw, 3.5rem);">Pilih Paket & Metode Kirim</h1>
+                    <p class="hero-desc">Pilih RESI ANGIN atau RESI MANUAL. Pembayaran via SeaBank / DANA. Mulai tingkatkan rating dan penjualan toko Shopee Anda sekarang!</p>
+                    <div class="hero-actions">
+                        <button class="btn-primary" onclick="scrollToPricing()">Lihat Paket →</button>
+                        <button class="btn-secondary" onclick="window.location.href='index.html'">← Kembali ke Beranda</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing" id="harga">
+            <div class="section-header">
+                <span class="section-tag">Paket Harga</span>
+                <h2 class="section-title">Pilih Paket & Metode Kirim</h2>
+                <p class="section-desc">Pilih RESI ANGIN atau RESI MANUAL. Pembayaran via SeaBank / DANA.</p>
+            </div>
+            <div class="pricing-grid">
+
+                <!-- Paket Starter -->
+                <div class="pricing-card" data-package="starter">
+                    <h3 class="pricing-name">Starter</h3>
+                    <p class="pricing-desc">Cocok untuk pemula</p>
+                    <div class="pricing-price"><span class="price-value">Rp 50K</span><span class="price-unit">/paket</span></div>
+                    <div class="shipping-options">
+                        <div class="shipping-title">
+                            <span>📦 Pilih Metode Pengiriman:</span>
+                        </div>
+                        <div class="radio-group" id="shipping-starter-group">
+                            <div class="radio-option selected" data-ship="angin" data-pkg="starter">
+                                <input type="radio" name="shipping-starter" value="angin" id="starter-angin" checked>
+                                <label class="radio-label" for="starter-angin">
+                                    <span class="radio-name"><span class="badge-angin">RESI ANGIN</span> 🚀</span>
+                                    <span class="radio-desc">Terima ulasan saja, TANPA kirim paket.</span>
+                                </label>
+                            </div>
+                            <div class="radio-option" data-ship="manual" data-pkg="starter">
+                                <input type="radio" name="shipping-starter" value="manual" id="starter-manual">
+                                <label class="radio-label" for="starter-manual">
+                                    <span class="radio-name"><span class="badge-manual">RESI MANUAL</span> 📬</span>
+                                    <span class="radio-desc">Kirim paket kosong ke pembeli.</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="shipping-info-buttons">
+                            <a href="resi-angin.html" class="info-link-btn angin">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                                <span>Pelajari Resi Angin</span>
+                            </a>
+                            <a href="resi-manual.html" class="info-link-btn manual">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                <span>Pelajari Resi Manual</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="payment-methods">
+                        <div class="payment-title">💳 Metode Pembayaran:</div>
+                        <div class="payment-buttons">
+                            <button class="payment-btn seabank" onclick="showSeaBankPayment('starter', '50K')">🏦 SeaBank</button>
+                            <button class="payment-btn dana" onclick="showDanaPayment('starter', '50K')">📱 DANA</button>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check-icon">✓</span> 10 Fake Order</li>
+                        <li><span class="check-icon">✓</span> Chat Natural + Review 5⭐</li>
+                        <li><span class="check-icon">✓</span> Riview Bisa Pakek Foto & Vidio</li>
+                        <li><span class="check-icon">✓</span> Foto Dan Vidio Dari Seller</li>
+                        <li><span class="check-icon">✓</span> Proses 1-2 Hari</li>
+                    </ul>
+                    <button class="pricing-btn primary" onclick="showSeaBankPayment('starter', '50K')">Pesan Sekarang</button>
+                </div>
+
+                <!-- Paket Business (Popular) -->
+                <div class="pricing-card popular" data-package="business">
+                    <h3 class="pricing-name">Business</h3>
+                    <p class="pricing-desc">Paling populer untuk growth</p>
+                    <div class="pricing-price"><span class="price-value">Rp 175K</span><span class="price-unit">/paket</span></div>
+                    <div class="shipping-options">
+                        <div class="shipping-title">
+                            <span>📦 Pilih Metode Pengiriman:</span>
+                        </div>
+                        <div class="radio-group" id="shipping-business-group">
+                            <div class="radio-option selected" data-ship="angin" data-pkg="business">
+                                <input type="radio" name="shipping-business" value="angin" id="business-angin" checked>
+                                <label class="radio-label" for="business-angin">
+                                    <span class="radio-name"><span class="badge-angin">RESI ANGIN</span> 🚀</span>
+                                    <span class="radio-desc">Terima ulasan saja, TANPA kirim paket.</span>
+                                </label>
+                            </div>
+                            <div class="radio-option" data-ship="manual" data-pkg="business">
+                                <input type="radio" name="shipping-business" value="manual" id="business-manual">
+                                <label class="radio-label" for="business-manual">
+                                    <span class="radio-name"><span class="badge-manual">RESI MANUAL</span> 📬</span>
+                                    <span class="radio-desc">Kirim paket kosong ke pembeli.</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="shipping-info-buttons">
+                            <a href="resi-angin.html" class="info-link-btn angin">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                                <span>Pelajari Resi Angin</span>
+                            </a>
+                            <a href="resi-manual.html" class="info-link-btn manual">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                <span>Pelajari Resi Manual</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="payment-methods">
+                        <div class="payment-title">💳 Metode Pembayaran:</div>
+                        <div class="payment-buttons">
+                            <button class="payment-btn seabank" onclick="showSeaBankPayment('business', '175K')">🏦 SeaBank</button>
+                            <button class="payment-btn dana" onclick="showDanaPayment('business', '175K')">📱 DANA</button>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check-icon">✓</span> 35 Fake Order</li>
+                        <li><span class="check-icon">✓</span> Chat Natural + Review 5⭐</li>
+                        <li><span class="check-icon">✓</span> Riview Bisa Pakek Foto & Vidio</li>
+                        <li><span class="check-icon">✓</span> Foto Dan Vidio Dari Seller</li>
+                        <li><span class="check-icon">✓</span> Proses 1-2 Hari</li>
+                    </ul>
+                    <button class="pricing-btn primary" onclick="showSeaBankPayment('business', '175K')">Pesan Sekarang</button>
+                </div>
+
+                <!-- Paket Enterprise -->
+                <div class="pricing-card" data-package="enterprise">
+                    <h3 class="pricing-name">Enterprise</h3>
+                    <p class="pricing-desc">Untuk toko besar & reseller</p>
+                    <div class="pricing-price"><span class="price-value">Rp 500K</span><span class="price-unit">/paket</span></div>
+                    <div class="shipping-options">
+                        <div class="shipping-title">
+                            <span>📦 Pilih Metode Pengiriman:</span>
+                        </div>
+                        <div class="radio-group" id="shipping-enterprise-group">
+                            <div class="radio-option selected" data-ship="angin" data-pkg="enterprise">
+                                <input type="radio" name="shipping-enterprise" value="angin" id="enterprise-angin" checked>
+                                <label class="radio-label" for="enterprise-angin">
+                                    <span class="radio-name"><span class="badge-angin">RESI ANGIN</span> 🚀</span>
+                                    <span class="radio-desc">Terima ulasan saja, TANPA kirim paket.</span>
+                                </label>
+                            </div>
+                            <div class="radio-option" data-ship="manual" data-pkg="enterprise">
+                                <input type="radio" name="shipping-enterprise" value="manual" id="enterprise-manual">
+                                <label class="radio-label" for="enterprise-manual">
+                                    <span class="radio-name"><span class="badge-manual">RESI MANUAL</span> 📬</span>
+                                    <span class="radio-desc">Kirim paket kosong ke pembeli.</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="shipping-info-buttons">
+                            <a href="resi-angin.html" class="info-link-btn angin">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                                <span>Pelajari Resi Angin</span>
+                            </a>
+                            <a href="resi-manual.html" class="info-link-btn manual">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                <span>Pelajari Resi Manual</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="payment-methods">
+                        <div class="payment-title">💳 Metode Pembayaran:</div>
+                        <div class="payment-buttons">
+                            <button class="payment-btn seabank" onclick="showSeaBankPayment('enterprise', '500K')">🏦 SeaBank</button>
+                            <button class="payment-btn dana" onclick="showDanaPayment('enterprise', '500K')">📱 DANA</button>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="check-icon">✓</span> 100 Fake Order</li>
+                        <li><span class="check-icon">✓</span> Chat Natural + Review 5⭐</li>
+                        <li><span class="check-icon">✓</span> Riview Bisa Pakek Foto & Vidio</li>
+                        <li><span class="check-icon">✓</span> Foto Dan Vidio Dari Seller</li>
+                        <li><span class="check-icon">✓</span> Proses 1-2 Hari</li>
+                    </ul>
+                    <button class="pricing-btn secondary" onclick="showSeaBankPayment('enterprise', '500K')">Pesan Sekarang</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Modal -->
+        <div id="paymentModal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closePaymentModal()">×</button>
+                <div id="paymentModalTitle" class="modal-title"></div>
+                <div id="paymentModalBody" class="modal-body"></div>
+            </div>
+        </div>
+
+        <!-- Shipping Info Modal -->
+        <div id="shippingInfoModal" class="modal">
+            <div class="modal-content modal-large">
+                <button class="modal-close" onclick="closeShippingInfoModal()">×</button>
+                <div class="modal-title">📦 Penjelasan Metode Pengiriman</div>
+                <div class="shipping-info-body">
+                    <div class="shipping-info-section">
+                        <div class="shipping-info-header angin">
+                            <h3>🚀 RESI ANGIN</h3>
+                            <span class="shipping-info-badge">Paling Populer</span>
+                        </div>
+                        <div class="shipping-info-content">
+                            <p><strong>Resi Angin</strong> adalah metode pengiriman tanpa mengirim paket fisik. Cocok untuk penjual yang ingin meningkatkan rating dan penjualan tanpa biaya pengiriman.</p>
+                            <ul class="shipping-info-list">
+                                <li>✅ <strong>Tanpa Pengiriman Fisik:</strong> Tidak perlu packing dan mengirim paket ke alamat CO</li>
+                                <li>✅ <strong>Biaya Lebih Hemat:</strong> Harga paket lebih murah karena tanpa ongkos kirim</li>
+                                <li>✅ <strong>Proses Lebih Cepat:</strong> Order diproses langsung tanpa menunggu pengiriman</li>
+                                <li>✅ <strong>100% Aman:</strong> Sistem kami menggunakan metode yang terbukti aman</li>
+                            </ul>
+                            <div class="shipping-info-warning">
+                                <strong>⚠️ Catatan:</strong> Resi Angin hanya memberikan ulasan dan rating, tidak ada pengiriman paket fisik.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shipping-info-divider"></div>
+
+                    <div class="shipping-info-section">
+                        <div class="shipping-info-header manual">
+                            <h3>📬 RESI MANUAL</h3>
+                            <span class="shipping-info-badge">Lebih Realistis</span>
+                        </div>
+                        <div class="shipping-info-content">
+                            <p><strong>Resi Manual</strong> adalah metode pengiriman dengan mengirim paket kosong ke alamat Cash On Delivery (CO). Ini memberikan bukti pengiriman yang lebih nyata.</p>
+                            <ul class="shipping-info-list">
+                                <li>✅ <strong>Pengiriman Fisik:</strong> Paket kosong dikirim ke alamat CO yang disediakan</li>
+                                <li>✅ <strong>Lebih Realistis:</strong> Ada bukti tracking resi dan pengiriman nyata</li>
+                                <li>✅ <strong>Meningkatkan Trust:</strong> Terlihat lebih natural di sistem Shopee</li>
+                                <li>✅ <strong>Disertai Alamat CO:</strong> Tim kami sediakan alamat CO yang aman</li>
+                            </ul>
+                            <div class="shipping-info-warning">
+                                <strong>⚠️ Catatan:</strong> Harga paket lebih tinggi karena termasuk ongkos kirim. Paket yang dikirim berupa barang kosong/sampah ringan.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shipping-info-comparison">
+                        <h4>📊 Perbandingan Cepat</h4>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Fitur</th>
+                                    <th>Resi Angin</th>
+                                    <th>Resi Manual</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pengiriman Fisik</td>
+                                    <td>❌ Tidak</td>
+                                    <td>✅ Ya</td>
+                                </tr>
+                                <tr>
+                                    <td>Harga Paket</td>
+                                    <td>💰 Lebih Murah</td>
+                                    <td>💰 Lebih Mahal</td>
+                                </tr>
+                                <tr>
+                                    <td>Kecepatan Proses</td>
+                                    <td>⚡ Instan</td>
+                                    <td>⏳ 2-3 Hari</td>
+                                </tr>
+                                <tr>
+                                    <td>Realistis</td>
+                                    <td>⭐⭐⭐</td>
+                                    <td>⭐⭐⭐⭐⭐</td>
+                                </tr>
+                                <tr>
+                                    <td>Cocok Untuk</td>
+                                    <td>Pemula, Budget Hemat</td>
+                                    <td>Toko Besar, Maksimal Trust</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="shipping-info-footer">
+                        <p>💡 <strong>Butuh bantuan memilih?</strong> Hubungi admin kami via WhatsApp untuk konsultasi gratis!</p>
+                        <button class="btn-primary" onclick="closeShippingInfoModal(); openWhatsApp();">💬 Chat dengan Admin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-inner">
+                <div class="footer-copy">2024 ZET ID. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="index.html">Kembali ke Beranda</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Custom JavaScript -->
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+    <script>
+        // Scroll to pricing section on this page
+        function scrollToPricing() {
+            document.getElementById('harga').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
