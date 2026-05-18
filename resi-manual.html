@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resi Manual - ZET ID</title>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            background: #0a0a0f;
+            background: linear-gradient(135deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%);
+        }
+        .video-background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            pointer-events: none;
+        }
+        .video-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+<video class="video-background desktop-video" autoplay muted loop playsinline>
+    <source src="https://www.image2url.com/r2/default/videos/1778969167301-233d9dc3-aee5-4ec6-9492-61c83c2de008.mp4" type="video/mp4">
+</video>
+<video class="video-background mobile-video" autoplay muted loop playsinline style="display: none;">
+    <source src="https://www.image2url.com/r2/default/videos/1779048953332-ee1f1a72-d04c-4f65-afa8-badd640e3e50.mp4" type="video/mp4">
+    <!-- Ganti YOUR_MOBILE_VIDEO_URL_HERE dengan link video untuk HP -->
+</video>
+<div class="video-overlay"></div>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-nav" id="sidebarNav">
+        <div class="nav-items">
+            <a href="index.html" class="nav-item" data-tooltip="Beranda" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span class="nav-text" style="display:none;">Beranda</span>
+            </a>
+            <a href="index.html#fitur" class="nav-item" data-tooltip="Fitur" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span class="nav-text" style="display:none;">Fitur</span>
+            </a>
+            <a href="pilih-paket.html" class="nav-item" data-tooltip="Pilih Paket" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span class="nav-text" style="display:none;">Pilih Paket</span>
+            </a>
+            <a href="resi-angin.html" class="nav-item" data-tooltip="Resi Angin" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <span class="nav-text" style="display:none;">Resi Angin</span>
+            </a>
+            <a href="resi-manual.html" class="nav-item active" data-tooltip="Resi Manual" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span class="nav-text" style="display:none;">Resi Manual</span>
+            </a>
+            <a href="resiko-fo.html" class="nav-item" data-tooltip="Resiko FO" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span class="nav-text" style="display:none;">Resiko FO</span>
+            </a>
+            <a href="index.html#cara" class="nav-item" data-tooltip="Cara Kerja" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span class="nav-text" style="display:none;">Cara Kerja</span>
+            </a>
+            <a href="index.html#testimoni" class="nav-item" data-tooltip="Testimoni" onclick="closeMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span class="nav-text" style="display:none;">Testimoni</span>
+            </a>
+        </div>
+        <div class="sidebar-cta" onclick="openWhatsApp()" title="Hubungi Kami">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Page Header -->
+        <section class="hero" style="min-height: 50vh;">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="badge"><span class="badge-dot"></span>Pilihan Terbaik & Realistis</div>
+                    <h1 class="hero-title" style="font-size: clamp(2rem, 4.5vw, 3.5rem);">📬 RESI MANUAL</h1>
+                    <p class="hero-desc">Metode pengiriman dengan mengirim paket kosong ke alamat Cash On Delivery (CO). Memberikan bukti pengiriman yang lebih nyata dan meningkatkan trust pembeli.</p>
+                    <div class="hero-actions">
+                        <button class="btn-primary" onclick="window.location.href='pilih-paket.html'">Pesan Sekarang →</button>
+                        <button class="btn-secondary" onclick="window.location.href='resi-angin.html'">Lihat Resi Angin</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What is Resi Manual -->
+        <section class="features">
+            <div class="section-header">
+                <!--<span class="section-tag">Apa Itu?</span>-->
+                <h2 class="section-title">Seller Yang Wajib Lakukan</h2>
+            </div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(16px);">
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--fg); opacity: 0.95;">
+                        <strong>Resi Manual</strong> adalah metode pengiriman di mana seller mengirim paket kosong ke alamat Cash On Delivery (CO). Paket yang dikirim berupa barang kosong atau sampah ringan yang memiliki berat minimal.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--fg); opacity: 0.95; margin-top: 1.5rem;">
+                        Seller Wajib Kasih Alamat Penerima / Alamat Pembeli Ke Admin. Alamat Penerima Kalo Bisa Jangan 1 Alamat Dengan Toko Untuk Menghindari Ditek Siystem ( Taruh Alamat  Saudara Atau Teman)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits -->
+        <section class="features">
+            <div class="section-header">
+                <span class="section-tag">Keunggulan</span>
+                <h2 class="section-title">Mengapa Memilih Resi Manual?</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                    <h3 class="feature-title">Pengiriman Fisik Nyata</h3>
+                    <p class="feature-desc">Paket kosong benar-benar dikirim ke alamat CO dengan resi pengiriman yang valid dan bisa dilacak.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                    <h3 class="feature-title">Lebih Realistis</h3>
+                    <p class="feature-desc">Ada bukti tracking resi dan pengiriman nyata yang terlihat lebih natural di sistem Shopee.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <h3 class="feature-title">Meningkatkan Trust</h3>
+                    <p class="feature-desc">Toko terlihat lebih profesional dan terpercaya di mata calon pembeli karena ada pengiriman nyata.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                    <h3 class="feature-title">Proses Termonitor</h3>
+                    <p class="feature-desc">Status pengiriman dapat dipantau langsung melalui Shopee dari order hingga selesai.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                    <h3 class="feature-title">Review Premium</h3>
+                    <p class="feature-desc">Review 5 bintang dengan foto unboxing yang meyakinkan dan meningkatkan konversi penjualan.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works">
+            <div class="section-header">
+                <span class="section-tag">Proses</span>
+                <h2 class="section-title">Cara Kerja Resi Manual</h2>
+            </div>
+            <div class="steps-container">
+                <div class="steps-line"></div>
+                <div class="step-item">
+                    <div class="step-number" style="border-color: #f59e0b; color: #f59e0b;">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Pilih Paket</h3>
+                        <p class="step-desc">Pilih paket Resi Manual dan lakukan pembayaran via SeaBank atau DANA.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number" style="border-color: #f59e0b; color: #f59e0b;">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Terima Alamat CO</h3>
+                        <p class="step-desc">Seller Kirim Alamat Penerima Ke Admin Untuk Penerimaan Barang.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number" style="border-color: #f59e0b; color: #f59e0b;">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Kirim Paket Kosong</h3>
+                        <p class="step-desc">Anda kirim paket kosong/sampah ringan ke alamat CO yang diberikan.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number" style="border-color: #f59e0b; color: #f59e0b;">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Review & Selesai</h3>
+                        <p class="step-desc">Paket diterima, buyer beri rating 5 bintang dan ulasan positif dengan foto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison -->
+        <!--<section class="features">
+            <div class="section-header">
+                <span class="section-tag">Perbandingan</span>
+                <h2 class="section-title">Resi Manual vs Resi Angin</h2>
+            </div>
+            <div style="max-width: 900px; margin: 0 auto; overflow-x: auto;">
+                <table class="comparison-table" style="min-width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Fitur</th>
+                            <th style="text-align: center;">Resi Angin</th>
+                            <th style="text-align: center; background: rgba(245, 158, 11, 0.2);">Resi Manual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pengiriman Fisik</td>
+                            <td style="text-align: center;">❌ Tidak</td>
+                            <td style="text-align: center; color: #fcd34d;">✅ Ya</td>
+                        </tr>
+                        <tr>
+                            <td>Biaya</td>
+                            <td style="text-align: center;">💰 Lebih Hemat</td>
+                            <td style="text-align: center; color: #fcd34d;">💰 Lebih Mahal</td>
+                        </tr>
+                        <tr>
+                            <td>Kecepatan</td>
+                            <td style="text-align: center;">⚡ Instan</td>
+                            <td style="text-align: center; color: #fcd34d;">⏳ 2-3 Hari</td>
+                        </tr>
+                        <tr>
+                            <td>Tingkat Realistis</td>
+                            <td style="text-align: center;">⭐⭐⭐</td>
+                            <td style="text-align: center; color: #fcd34d;">⭐⭐⭐⭐⭐</td>
+                        </tr>
+                        <tr>
+                            <td>Cocok Untuk</td>
+                            <td style="text-align: center;">Pemula, Budget Hemat</td>
+                            <td style="text-align: center; color: #fcd34d;">Toko Besar, Maksimal Trust</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- What to Send -->
+        <section class="features">
+            <div class="section-header">
+                <span class="section-tag">Panduan</span>
+                <h2 class="section-title">Apa yang Dikirim?</h2>
+            </div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(16px);">
+                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; color: #fcd34d;">📦 Contoh Barang yang Dikirim:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 1rem;">
+                            <strong>✅ Karton Kosong</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.85; margin-top: 0.5rem;">Karton bekas yang sudah dirapikan</p>
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 1rem;">
+                            <strong>✅ Kertas Koran</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.85; margin-top: 0.5rem;">Koran bekas yang sudah ditumpuk</p>
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 1rem;">
+                            <strong>✅ Botol Plastik Kosong</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.85; margin-top: 0.5rem;">Botol mineral yang sudah dikosongkan</p>
+                        </div>
+                        <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 1rem;">
+                            <strong>✅ Plastik Sampah</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.85; margin-top: 0.5rem;">Plastik ringan untuk penambah berat</p>
+                        </div>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; color: #fcd34d;">⚠️ Hal yang TAK BOLEH Dikirim:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 1rem;">
+                            <strong>❌ Barang Berbahaya</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.85; margin-top: 0.5rem;">Bahan kimia, baterai, benda tajam</p>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 1rem;">
+                            <strong>❌ Barang Ilegal</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.85; margin-top: 0.5rem;">Barang yang melanggar hukum</p>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 1rem;">
+                            <strong>❌ Barang Berat</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.85; margin-top: 0.5rem;">Batu, logam, atau barang berat lainnya</p>
+                        </div>
+                        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 1rem;">
+                            <strong>❌ Barang Asli</strong>
+                            <p style="font-size: 0.9rem; opacity: 0.85; margin-top: 0.5rem;">Jangan kirim produk asli toko Anda</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Warning Section -->
+        <!--<section class="features">
+            <div class="section-header">
+                <span class="section-tag">Perhatian</span>
+                <h2 class="section-title">Hal yang Perlu Diperhatikan</h2>
+            </div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(245, 158, 11, 0.15); border: 2px solid rgba(245, 158, 11, 0.4); border-radius: 24px; padding: 2rem;">
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(245, 158, 11, 0.2); align-items: flex-start;">
+                            <span style="font-size: 1.5rem; flex-shrink: 0;">⚠️</span>
+                            <div>
+                                <strong>Harga paket sudah termasuk ongkos kirim</strong>
+                                <p style="opacity: 0.9; margin-top: 0.5rem; font-size: 0.95rem;">Pastikan Anda sudah mengetahui total biaya sebelum memesan paket.</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(245, 158, 11, 0.2); align-items: flex-start;">
+                            <span style="font-size: 1.5rem; flex-shrink: 0;">⚠️</span>
+                            <div>
+                                <strong>Pastikan paket dikirim ke alamat CO yang diberikan</strong>
+                                <p style="opacity: 0.9; margin-top: 0.5rem; font-size: 0.95rem;">Kesalahan alamat dapat menyebabkan paket hilang dan proses tidak selesai.</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(245, 158, 11, 0.2); align-items: flex-start;">
+                            <span style="font-size: 1.5rem; flex-shrink: 0;">⚠️</span>
+                            <div>
+                                <strong>Proses membutuhkan waktu 2-3 hari</strong>
+                                <p style="opacity: 0.9; margin-top: 0.5rem; font-size: 0.95rem;">Waktu pengiriman tergantung pada lokasi dan jasa ekspedisi yang digunakan.</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 1rem; padding: 1rem 0; align-items: flex-start;">
+                            <span style="font-size: 1.5rem; flex-shrink: 0;">⚠️</span>
+                            <div>
+                                <strong>Cocok untuk toko yang ingin tampil profesional</strong>
+                                <p style="opacity: 0.9; margin-top: 0.5rem; font-size: 0.95rem;">Resi Manual memberikan bukti pengiriman yang lebih meyakinkan untuk calon pembeli.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-box">
+                <h2 class="cta-title">Siap Tingkatkan Trust Toko?</h2>
+                <p class="cta-desc">Pilih paket Resi Manual dan berikan bukti pengiriman yang nyata untuk calon pembeli Anda!</p>
+                <button class="btn-primary" onclick="window.location.href='pilih-paket.html'">📦 Pilih Paket Sekarang</button>
+                <div class="contact-info">
+                    <div class="contact-item">📞 +62 859-2163-2214</div>
+                    <div class="contact-item">⏰ Senin-Minggu, 08:00-23:00 WIB</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-inner">
+                <div class="footer-copy">2024 ZET ID. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="index.html">Kembali ke Beranda</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Custom JavaScript -->
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
